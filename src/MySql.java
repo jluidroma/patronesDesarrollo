@@ -61,12 +61,13 @@ public class MySql implements MotorBaseDatos {
 
             // Iterar sobre el resultado y agregar cada producto a la lista
             while (rs.next()) {
+                int id = rs.getInt("id_producto");
                 String nombre = rs.getString("nombre");
                 int cantidad = rs.getInt("cantidad");
                 double valorUnitario = rs.getDouble("valor_unitario");
 
                 // Crear un nuevo objeto Producto con los datos del resultado
-                Producto producto = new Producto(nombre, cantidad, valorUnitario);
+                Producto producto = new Producto(id,nombre, cantidad, valorUnitario);
                 listaProductos.add(producto);
             }
 

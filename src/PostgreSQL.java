@@ -15,7 +15,7 @@ public class PostgreSQL implements MotorBaseDatos {
     private static final String URL = "jdbc:postgresql://localhost:5432/inventariopgdb"; 
     private static final String USUARIO = "postgres";
     private static final String CONTRASENA = "jluidroma";
-
+    //constructor privado siguiendo el modelo singleton
     private PostgreSQL() {
         // Establecer la conexión a la base de datos PostgreSQL
         try {
@@ -31,8 +31,6 @@ public class PostgreSQL implements MotorBaseDatos {
     public static PostgreSQL getInstancia() {
         if (instancia == null) {
             instancia = new PostgreSQL();
-        }else{
-            System.out.println("Ya existe hay una instancia corriendo en el motor");
         }
         return instancia;
     }
@@ -52,6 +50,7 @@ public class PostgreSQL implements MotorBaseDatos {
             System.out.println("Error al guardar el producto en la base de datos postgres");
         }
     }
+
    // Método para obtener los productos
         public List<Producto> traerProductos() {
         String sql = "SELECT * FROM productos";
@@ -62,12 +61,13 @@ public class PostgreSQL implements MotorBaseDatos {
 
             // Iterar sobre el resultado y agregar cada producto a la lista
             while (rs.next()) {
+                int id= rs.getInt("id_producto");
                 String nombre = rs.getString("nombre");
                 int cantidad = rs.getInt("cantidad");
                 double valorUnitario = rs.getDouble("valor_unitario");
 
                 // Crear un nuevo objeto Producto con los datos del resultado
-                Producto producto = new Producto(nombre, cantidad, valorUnitario);
+                Producto producto = new Producto(id,nombre, cantidad, valorUnitario);
                 listaProductos.add(producto);
             }
 

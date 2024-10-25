@@ -1,6 +1,7 @@
 public class Producto implements Cloneable {
      
 //defini atributos
+private int id;
 private String nombre;
 private int cantidad;
 private double valorUnitario;
@@ -9,6 +10,20 @@ public Producto(String nombre, int cantidad, double valorUnitario) {
      this.nombre = nombre;
      this.cantidad = cantidad;
      this.valorUnitario = valorUnitario;
+}
+
+public Producto(int id, String nombre, int cantidad, double valorUnitario) {
+     this.id = id;
+     this.nombre = nombre;
+     this.cantidad = cantidad;
+     this.valorUnitario = valorUnitario;
+}
+public int getId() {
+     return id;
+}
+
+public void setId(int id) {
+     this.id = id;
 }
 
 public String getNombre() {
@@ -41,17 +56,10 @@ public String toString() {
      return "Producto [nombre=" + nombre + ", cantidad=" + cantidad + ", valorUnitario=" + valorUnitario + "]";
 }
 
+
 @Override
-public Producto clone() {
-     try {
-          return (Producto) super.clone();
-     } catch (CloneNotSupportedException e) {
-          e.printStackTrace();
-          return null;
-     }
+protected Object clone() throws CloneNotSupportedException {
+     return super.clone(); 
 }
 
-
-// Para crear un producto a partir de uno existente:
-//Producto nuevoProducto = productoExistente.clone();
 }
